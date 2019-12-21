@@ -114,6 +114,12 @@ if(strcmp(username,"admin")==0&&strcmp(password,"sifre")==0){*/
 
 
  void add(FILE *fpointer,struct bookinfo *book){
+ 	int addl=0;
+ 	char new[15];
+ 	int tryadd=0;
+	
+	
+		
 	
 	fpointer=fopen("Books.txt","a");
 	
@@ -124,9 +130,43 @@ if(strcmp(username,"admin")==0&&strcmp(password,"sifre")==0){*/
 	printf("\t\t\t\tPlease Enter the ID of the Book: ");
 	scanf("%d", &book->bookID);
 	// scanf("%s", book->StudentID);
-	fwrite((book), sizeof(struct bookinfo),1,fpointer);
-	fclose(fpointer);
+
+
+	do{
 	
+	 printf("\n\t\t\t\tBook is added");
+	 printf("\n\t\t\t\t1-Add a New Book 2-Back to Main Menu 3-Exit\n\t\t\t\t\n");
+	 printf("\n\t\t\t\t Shortcuts 1-Add 2-Back 3-Exit\n");
+	 printf("\n\n\t\t\t\t>>");
+	 scanf("%s",new);
+	 if(tryadd==3){
+	 
+    }
+	else if(strcmp(new,"Add")==0 || strcmp(new,"1")==0){	
+		add(fpointer,book);
+	}	
+	
+	 else if(strcmp(new,"Back")==0 || strcmp(new,"2")==0){	
+	 	system("cls");
+	 	librarianmenu();
+	 	
+	 }
+	 
+	 else if(strcmp(new,"Exit")==0 || strcmp(new,"3")==0){	
+exit(0);
+}
+
+else{
+		// system("cls");
+		tryadd+=1;
+		printf("\n\t\t\t\tWrong Choise Please try again : %d/3",tryadd);
+		addl=1;
+	}	
+
+}while(addl);
+	fwrite((book), sizeof(struct bookinfo),1,fpointer);
+fclose(fpointer);
+
 }
 
 
@@ -171,18 +211,17 @@ if(strcmp(username,"admin")==0&&strcmp(password,"sifre")==0){*/
       				break;
 					}
 					
-					/*else if(strcmp((book->StudentID),(studentinfo->studentID))!=0)
+					else if(strcmp((book->StudentID),(studentinfo->studentID))!=0)
 					printf("\t\t\t\tThe Name of the Book: %s\n",book->bookname);
       				printf("\t\t\t\tThe Writer of the Book: %s\n",book->writer);
       				printf("\t\t\t\tThe ID of the Book: %d\n",book->bookID);
       				break;
-					}*/
+					}
 				}
 				}
-			//}
 		}
-	}
 	
+
 
 
 	else if(strcmp(optype,"id")==0){
@@ -254,7 +293,7 @@ if(strcmp(username,"admin")==0&&strcmp(password,"sifre")==0){*/
      
      do{
 
-	if(strcmp(operation1,"admin")==0){
+	// if(strcmp(operation1,"admin")==0){
 	printf("\n\t\t\t\tPlease Enter Name of the Operation\n");
 	printf("\t\t\t\t1-Add a New Book (Add)\n");
 	printf("\t\t\t\t2-Search a Book (Src)\n");
@@ -291,7 +330,7 @@ if(strcmp(username,"admin")==0&&strcmp(password,"sifre")==0){*/
 	 printf("\n\t\t\t\tWrong Choose Please Try Again!!\n");
 		libloop=1;
 	}
-}
+
 	}while(libloop);
 
 }
