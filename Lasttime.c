@@ -18,15 +18,17 @@ char StudentID[20];
 
 };
 struct student{
-	char name[10];
-	char surname[10];
-	char studentID[6];	
+	char name[20];
+	char surname[20];
+	char studentID[20];	
 };
 struct borrow{
 	struct bookinfo;
 	struct student;
 };
 void main(){
+	int statusNum1(fpointer,book);
+	int statusNum2(studentpointer,studentinfo);
     FILE *studentpointer;
 	struct student *studentinfo=(struct student*) malloc(sizeof(struct student));
 	struct bookinfo *book =(struct bookinfo*) malloc(sizeof(struct bookinfo));
@@ -36,6 +38,8 @@ char username1[10];
 char password1[10];
 FILE *fpointer;
 //system("COLOR 1D");
+
+
 
 
 
@@ -136,85 +140,85 @@ if(strcmp(username,"admin")==0&&strcmp(password,"sifre")==0){*/
 	do{
 	
 	printf("\t\t\t\tChoose the operation type\n");
-	printf("1-Searching with Book Name(book)\n2-Searching with Book ID(id)\n3-Searching with Writer's Name(writer)\n");
+	printf("\t\t\t\t1-Searching with Book Name(book)\n\t\t\t\t2-Searching with Book ID(id)\n\t\t\t\t3-Searching with Writer's Name(writer)\n");
 	char optype[15];
 	
-	printf("Enter the Operation Type: ");
+	printf("\t\t\t\tEnter the Operation Type: ");
 	scanf("%s", &optype);
 	//system("cls");
 	char bookname1[20];
 	char writer[20];
 	int bookid1;
 	if(strcmp(optype,"book")==0 || strcmp(optype,"1")==0){
-	    printf("Please Enter the Book Name: ");
+	    printf("\t\t\t\tPlease Enter the Book Name: ");
 	    scanf("%s",bookname1);
+	    system("cls");
 		while(!feof(fpointer)){
 			fread(book, sizeof(struct bookinfo),1,fpointer);
-			while(!feof(studentpointer)){
-				fread(studentinfo,sizeof(struct student),1,studentpointer);
-			
+			//while(!feof(studentpointer)){
 				
 				if(strcmp((book->bookname),bookname1)==0){
-					//printf("Name of the Book %s\n", book->bookname);
-					//printf("Name of the Writer: %s\n", book->writer);
-					//printf("ID of the Book: %d\n", book->bookID);
+					while(!feof(studentpointer)){
+						fread(studentinfo,sizeof(struct student),1,studentpointer);	
+					
 					if(strcmp((book->StudentID),(studentinfo->studentID))==0){
-					printf("The Name of the Book: %s\n",book->bookname);
-      				printf("The Writer of the Book: %s\n",book->writer);
-      				printf("The ID of the Book: %d\n",book->bookID);
-      				printf("Name of the Student: %s\n",studentinfo->name);
-      				printf("Surname of the Student %s\n",studentinfo->surname);
-      				printf("ID Number of the Student: %s\n",studentinfo->studentID);
+					printf("\t\t\t\tThe Name of the Book: %s\n",book->bookname);
+      				printf("\t\t\t\tThe Writer of the Book: %s\n",book->writer);
+      				printf("\t\t\t\tThe ID of the Book: %d\n",book->bookID);
+      				printf("\t\t\t\tName of the Student: %s\n",studentinfo->name);
+      				printf("\t\t\t\tSurname of the Student %s\n",studentinfo->surname);
+      				printf("\t\t\t\tID Number of the Student: %s\n",studentinfo->studentID);
+      				break;
 					}
-					else{
-						printf("The name of the Book: %s\n",book->bookname);
-      					printf("The writer of the Book: %s\n",book->writer);
-      					printf("The ID of The Book: %d\n",book->bookID);
-						printf("Book is avaliable");
-					}
-				
+					
+					/*else if(strcmp((book->StudentID),(studentinfo->studentID))!=0)
+					printf("\t\t\t\tThe Name of the Book: %s\n",book->bookname);
+      				printf("\t\t\t\tThe Writer of the Book: %s\n",book->writer);
+      				printf("\t\t\t\tThe ID of the Book: %d\n",book->bookID);
+      				break;
+					}*/
 				}
-			}
+				}
+			//}
 		}
-		break;
 	}
+	
+
+
 	else if(strcmp(optype,"id")==0){
-		printf("Enter the Book ID: ");
+		printf("\t\t\t\tEnter the Book ID: ");
 		scanf("%d",&bookid1);
 		while(!feof(fpointer)){
 			fread(book, sizeof(struct bookinfo),1,fpointer);
 				if((book->bookID)==bookid1){
+					while(!feof(studentpointer)){
+						fread(studentinfo,sizeof(struct student),1,studentpointer);	
 					if(strcmp((book->StudentID),(studentinfo->studentID))==0){
-					printf("The Name of the Book: %s\n",book->bookname);
-      				printf("The Writer of the Book: %s\n",book->writer);
-      				printf("The ID of the Book: %d\n",book->bookID);
-      				printf("Name of the Student: %s\n",studentinfo->name);
-      				printf("Surname of the Student %s\n",studentinfo->surname);
-      				printf("ID Number of the Student: %s\n",studentinfo->studentID);
+					printf("\t\t\t\tThe Name of the Book: %s\n",book->bookname);
+      				printf("\t\t\t\tThe Writer of the Book: %s\n",book->writer);
+      				printf("\t\t\t\tThe ID of the Book: %d\n",book->bookID);
+      				printf("\t\t\t\tName of the Student: %s\n",studentinfo->name);
+      				printf("\t\t\t\tSurname of the Student %s\n",studentinfo->surname);
+      				printf("\t\t\t\tID Number of the Student: %s\n",studentinfo->studentID);
+      				break;
 					}
-					else{
-						printf("The name of the Book: %s\n",book->bookname);
-      					printf("The writer of the Book: %s\n",book->writer);
-      					printf("The ID of The Book: %d\n",book->bookID);
-						printf("Book is avaliable");
-					}
-					break;
-					
+				}
 				}	//fread(book,sizeof(struct bookinfo),1,fpointer);
 		}
 	}
 
 	else if(strcmp(optype,"writer")==0){
-		printf("Enter the Writer of Book: ");
+		printf("\t\t\t\tEnter the Writer of Book: ");
 		scanf("%s", writer);
 		while(!feof(fpointer)){
 			fread(book, sizeof(struct bookinfo),1,fpointer);
+			printf("The book written by %s ",book->writer);
 				if(strcmp((book->writer),writer)==0){
-					printf("Name of the Book %s\n", book->bookname);
-					printf("Name of the Writer: %s\n", book->writer);
-					printf("ID of the Book: %d\n", book->bookID);
+					
+					printf("%s\n", book->bookname);
 			}
 		}
+		break;
 	}
 	/*else if(strcmp(optype,"all")==0){
 		int count = 0,i=0;
@@ -278,7 +282,7 @@ if(strcmp(username,"admin")==0&&strcmp(password,"sifre")==0){*/
 		borrow(fpointer);
 			}
 		
-	else if(strcmp(op,"Take")==0){
+	else if(strcmp(op,"Take")==0 || strcmp(op,"5")==0){
 		deletestudentname();
 	}
 	else {
@@ -298,9 +302,9 @@ if(strcmp(username,"admin")==0&&strcmp(password,"sifre")==0){*/
 
  void borrow(FILE *fpointer){
 		struct bookinfo *book=(struct bookinfo*) malloc(sizeof(struct bookinfo));
-		printf("\nChoose one operation: \n");
-		printf("\nEnter the name of the book (N)\n");
-		printf("\nEnter the ID of the book (ID)\n");
+		printf("\n\t\t\t\tChoose one operation: \n");
+		printf("\n\t\t\t\tEnter the name of the book (N)\n");
+		printf("\n\t\t\t\tEnter the ID of the book (ID)\n");
 		char id[20];
 		char op[5];
 		scanf("%s", op);
@@ -308,20 +312,21 @@ if(strcmp(username,"admin")==0&&strcmp(password,"sifre")==0){*/
 		int bookid123;
 		fpointer=fopen("Books.txt","r+");
 		if(strcmp(op,"N")==0){
-			printf("Bookname: ");
+			printf("\t\t\t\tBookname: ");
 			scanf("%s", bookname123);
 				while(!feof(fpointer)){	
 				fread(book,sizeof(struct bookinfo),1,fpointer);
 				if(strcmp((book->bookname),bookname123)==0){
-					
-				}
-			}
-			
-				printf("\nEnter the Student ID to Borrow the Book: ");
+				printf("\n\t\t\t\tEnter the Student ID to Borrow the Book: ");
 				scanf("%s", id);
 				strcpy(book->StudentID,id);
 				fseek(fpointer,-1*sizeof(struct bookinfo),SEEK_CUR);
 				fwrite(book,sizeof(struct bookinfo),1,fpointer);
+				break;
+				}
+			}
+			
+				
 		}
 		else if(strcmp(op,"ID")==0){
 			printf("ID: ");
@@ -332,7 +337,7 @@ if(strcmp(username,"admin")==0&&strcmp(password,"sifre")==0){*/
 					
 				}
 			}
-			printf("Enter the Student ID to Borrow the Book: ");
+			printf("\t\t\t\tEnter the Student ID to Borrow the Book: ");
 			scanf("%s", id);
 			strcpy(book->StudentID,id);
 			fseek(fpointer,-1*sizeof(struct bookinfo),SEEK_CUR);
@@ -362,24 +367,53 @@ void deletestudentname(){
 	FILE *fpointer;
 	struct bookinfo *book=(struct bookinfo*) malloc(sizeof(struct bookinfo));
 	fpointer=fopen("Books.txt","r+");
-	printf("Enter the Book ID: ");
-	int id;
-	printf("Enter the book ID: ");
-	scanf("%d", &id);
+	int id1;
+	printf("\t\t\t\tEnter the Book ID: ");
+	scanf("%d", &id1);
 	while(!feof(fpointer)){
 		fread(book,sizeof(struct bookinfo),1,fpointer);
-		if(book->bookID==id){
+		if(book->bookID==id1){
 			
-
+		strcpy(book->StudentID,"e");
+			fseek(fpointer,-1*sizeof(struct bookinfo),SEEK_CUR);
+			fwrite(book,sizeof(struct bookinfo),1,fpointer);
+			break;
 		}
-
+			
 	}
 	
-	fseek(fpointer,-1*sizeof(struct bookinfo),SEEK_CUR);
-	strcpy(book->StudentID,"");
-	fprintf(fpointer,book);
-	fclose(fpointer);
+	
+	
+
+	fclose(fpointer);		
 }
+
+int statusNum1(FILE *fpointer,struct bookinfo *book){
+	int count1=0;
+	fpointer=fopen("Books.txt","r");
+	while(!feof(fpointer)){
+		fread(book,sizeof(struct bookinfo),1,fpointer);
+		count1+=1;
+	}
+	count1-=1;
+	//printf("Registered Customer: %d",count);
+	fclose(fpointer);
+	return count1;
+}
+
+int statusNum2(FILE *studentpointer,struct student *studentinfo){
+	int count2=0;
+	studentpointer=fopen("Students.txt","r");
+	while(!feof(studentpointer)){
+		fread(studentinfo,sizeof(struct student),1,studentpointer);
+		count2+=1;
+	}
+	count2-=1;
+	//printf("Registered Customer: %d",count);
+	fclose(studentpointer);
+	return count2;
+}
+
 
 
 
